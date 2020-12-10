@@ -1,3 +1,6 @@
+#add my personal
+Models/Config.cs
+
 # globs
 Makefile.in
 *.userprefs
