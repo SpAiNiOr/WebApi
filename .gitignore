@@ -1,5 +1,5 @@
 #add my personal
-Models/Config.cs
+WebApi/Models/Config.cs
 
 # globs
 Makefile.in
