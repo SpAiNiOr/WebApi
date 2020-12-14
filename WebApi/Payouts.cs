@@ -1,5 +1,6 @@
 ﻿using System;
 using WebApi.Models.PayoutModels;
+using System.Threading.Tasks;
 using RestSharp;
 using System.Text.Json;
 using WebApi.Models;
@@ -13,7 +14,7 @@ namespace WebApi
         {
         }
 
-        public BeneficiaryResponse GetBeneficiaryByID(string bearer, string id)
+        public async Task<BeneficiaryResponse> GetBeneficiaryByID(string bearer, string id)
         {
             var client = new RestClient();
             client.BaseUrl = new Uri(Config.BaseURL);
@@ -31,7 +32,7 @@ namespace WebApi
             request.AddUrlSegment("beneficiary_id", id);
             request.AddHeader("Authorization", bearer);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteAsync(request);
 
             Console.WriteLine(response.Content);
 
@@ -40,7 +41,7 @@ namespace WebApi
             return beneficiaryResponse;
         }
 
-        public BeneficiaryResponse CreateBeneficiary(string bearer)
+        public async Task<BeneficiaryResponse> CreateBeneficiary(string bearer)
         {
 
             //create Beneficiary request object
@@ -112,7 +113,7 @@ namespace WebApi
             request.AddHeader("Authorization", bearer);
             request.AddParameter("application / json", json, ParameterType.RequestBody);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteAsync(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
             {

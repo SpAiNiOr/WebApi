@@ -10,7 +10,7 @@ namespace WebApi
     class Program
     {
 
-        static void Main(string[] args)
+        static async void Main(string[] args)
         {
 
             GetToken getToken = new GetToken();
@@ -36,7 +36,7 @@ namespace WebApi
 
             //Create a new Beneficiary
             Console.WriteLine("Try create a new Beneficiary");
-            BeneficiaryResponse newBeneficiary = payouts.CreateBeneficiary(bearer);
+            BeneficiaryResponse newBeneficiary = await payouts.CreateBeneficiary(bearer);
 
             if (newBeneficiary == null)
             {

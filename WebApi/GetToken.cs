@@ -18,7 +18,7 @@ namespace WebApi
 
         public GetToken() { }
 
-        public string GetWebToken()
+        public async Task<WebToken> GetWebToken()
         {
             var client = new RestClient();
             client.BaseUrl = new Uri(Config.BaseURL);
@@ -32,12 +32,12 @@ namespace WebApi
 
             request.AddParameter("application/json", @"{}", ParameterType.RequestBody);
 
-            IRestResponse response = client.Execute(request);
+            IRestResponse response = await client.ExecuteAsync<WebToken>(request);
 
             //var token = JsonSerializer.Deserialize<WebToken>(response.Content);
 
             WebToken token = JsonConvert.DeserializeObject<WebToken>(response.Content);
-            return token.token;
+            return token;
         }
     }
 }
